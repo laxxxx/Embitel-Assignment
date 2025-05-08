@@ -23,9 +23,9 @@ class UserTableViewCell: UITableViewCell {
     }
     
     func configure(with user: User) {
-        self.nameLabel.text  = user.name
-        self.emailLabel.text = user.email
-        self.addressLabel.text = user.address.street + ", " + user.address.city
-        self.phoneLabel.text  = user.phone
+        self.nameLabel.text  = "Name - \(user.name)"
+        self.emailLabel.text = "Email - \(user.email)"
+        self.addressLabel.text = "Address - \(user.address.street + ", " + user.address.city)"
+        self.phoneLabel.text  = "Phone - \(user.phone)"
     }
 }

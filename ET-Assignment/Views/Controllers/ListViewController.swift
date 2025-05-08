@@ -26,6 +26,7 @@ class ListViewController: UIViewController {
         self.tableView.delegate = self
         let nib = UINib(nibName: "UserTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "UserTableViewCell")
+        self.filterButton.configuration?.baseBackgroundColor = .label
     }
     
     func bindViewModel() {
