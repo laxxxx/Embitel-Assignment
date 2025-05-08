@@ -7,7 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ListViewController: UIViewController {
+    
+    @IBOutlet weak var cityPicker: UIPickerView!
+    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
