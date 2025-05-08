@@ -7,6 +7,9 @@
 
 import Foundation
 
+// MARK: - NetworkManager
+/// A singleton for network tasks
+
 class NetworkManager {
     static let shared = NetworkManager()
     

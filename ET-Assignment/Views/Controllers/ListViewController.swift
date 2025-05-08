@@ -7,6 +7,9 @@
 
 import UIKit
 
+// MARK: - ListViewController
+/// Displays a list of users and allows filtering via a bottom-sheet city picker.
+
 class ListViewController: UIViewController {
     
     @IBOutlet weak var filterButton: UIButton!
@@ -21,6 +24,7 @@ class ListViewController: UIViewController {
         viewModel.fetchUsers()
     }
     
+    // MARK: UI Setup
     func setupUI() {
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -29,6 +33,7 @@ class ListViewController: UIViewController {
         self.filterButton.configuration?.baseBackgroundColor = .label
     }
     
+    // MARK: Bindings
     func bindViewModel() {
         viewModel.onDataUpdate = { [weak self] in
             self?.tableView.reloadData()
@@ -40,6 +45,7 @@ class ListViewController: UIViewController {
     }
     
     private func showBottomSheet() {
+        /// Instantiates and presents CitySheetViewController as a bottom sheet
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         guard let bottomSheetVC = storyboard
@@ -47,22 +53,26 @@ class ListViewController: UIViewController {
                 as? CitySheetViewController
         else { return }
         
+        // Pass data and callback
         bottomSheetVC.cities = viewModel.cities
         bottomSheetVC.onCitySelected = { [weak self] selectedCity in
             self?.viewModel.filterUsers(by: selectedCity)
             self?.filterButton.setTitle(selectedCity ?? "All Cities", for: .normal)
         }
         
+        // Configure bottom sheet appearance and behavior
         if let sheet = bottomSheetVC.sheetPresentationController {
             sheet.detents = [.medium(), .medium()]
             sheet.prefersGrabberVisible = true
             sheet.largestUndimmedDetentIdentifier = .large
         }
         
+        // Present the sheet
         present(bottomSheetVC, animated: true)
     }
 }
 
+// MARK: - TableView DataSource & Delegate
 extension ListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.filteredUsers.count

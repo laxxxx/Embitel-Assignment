@@ -8,6 +8,9 @@
 import Foundation
 import UIKit
 
+// MARK: - CitySheetViewController
+/// Bottom-sheet controller housing a UIPickerView for city selection.
+
 class CitySheetViewController: UIViewController {
     
     var cities: [String] = []
@@ -23,6 +26,7 @@ class CitySheetViewController: UIViewController {
 }
 
 
+// MARK: - Picker DataSource & Delegate
 extension CitySheetViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int { 1 }
     
